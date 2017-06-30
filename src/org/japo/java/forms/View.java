@@ -33,17 +33,17 @@ public class View extends javax.swing.JFrame {
 
     // Constructor
     public View() {
-        // Inicializar GUI - PREVIA
+        // Inicializar Vista - PREVIA
         beforeInit();
 
-        // Construcción - GUI
+        // Construcción - Vista
         initComponents();
 
-        // Inicializar GUI - POSTERIOR
+        // Inicializar Vista - POSTERIOR
         afterInit();
     }
 
-    // Inicializar GUI - PREVIA
+    // Inicializar Vista - PREVIA
     private void beforeInit() {
         // Generar Modelo
         model = new Model();
@@ -57,12 +57,15 @@ public class View extends javax.swing.JFrame {
         // Otras inicializaciones
     }
 
-    // Inicializar GUI - POSTERIOR
+    // Inicializar Vista - POSTERIOR
     private void afterInit() {
         // Icono Ventana - Recurso
         URL urlICN = ClassLoader.getSystemResource("img/favicon.png");
         setIconImage(new ImageIcon(urlICN).getImage());
 
+//        // Escuchador Cambio Texto
+//        txfTexto.getDocument().addDocumentListener(new DEM(control));
+//
         // Modelo > Vista
         control.sincronizarModeloVista(model, this);
 

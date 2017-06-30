@@ -51,7 +51,7 @@ public class Controller {
         this.prpApp = UtilesApp.cargarPropiedades();
 
         // Controlador de Modelo
-        this.modelControl = new ModelController(this);
+        this.modelControl = new ModelController();
 
         // *** Controlador de Persistencia ***
         this.daControl = new DAControllerPRP(modelControl);
@@ -108,6 +108,7 @@ public class Controller {
     public void sincronizarModeloVista(Model model, View view) {
         // Texto
         view.lblRotulo.setText(model.getTexto());
+//        view.txfTexto.setText(model.getTexto());
 
         // Tipografia
         UtilesSwing.seleccionarElementoCombo(view.cbbFamilia, model.getFamilia());
