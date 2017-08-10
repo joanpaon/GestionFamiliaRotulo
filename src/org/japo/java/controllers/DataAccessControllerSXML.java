@@ -19,24 +19,28 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import org.japo.java.entities.Model;
-import org.japo.java.interfaces.IDAController;
+import org.japo.java.interfaces.IDataAccessController;
+import org.japo.java.models.Model;
 
 /**
  *
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
-public class DAControllerSXML implements IDAController {
+public class DataAccessControllerSXML implements IDataAccessController {
 
-    // Referencias
-    private final ModelController modelControl;
+    // Fichero SXML > Modelo
+    @Override
+    public void importarModelo(Model model, String fichero) throws Exception {
+        try (XMLDecoder entrada = new XMLDecoder(new FileInputStream(fichero))) {
+            // Fichero SXML > Modelo (Importado)
+            Model modelClon = (Model) entrada.readObject();
 
-    // Constructor Parametrizado
-    public DAControllerSXML(ModelController modelControl) {
-        this.modelControl = modelControl;
+            // Modelo (Importado) > Modelo
+            convertirModeloModelo(modelClon, model);
+        }
     }
 
-    // Modelo > Fichero [SXML]
+    // Modelo > Fichero SXML
     @Override
     public void exportarModelo(Model model, String fichero) throws Exception {
         try (XMLEncoder salida = new XMLEncoder(new FileOutputStream(fichero))) {
@@ -45,15 +49,8 @@ public class DAControllerSXML implements IDAController {
         }
     }
 
-    // Fichero [SXML] > Modelo
-    @Override
-    public void importarModelo(Model modeloFin, String fichero) throws Exception {
-        try (XMLDecoder entrada = new XMLDecoder(new FileInputStream(fichero))) {
-            // Persistencia Binaria > Modelo Importado            
-            Model modeloIni = (Model) entrada.readObject();
+    // Modelo > Modelo
+    public void convertirModeloModelo(Model modeloIni, Model modeloFin) {
 
-            // Modelo Importado > Modelo
-            modelControl.copiarModelo(modeloIni, modeloFin);
-        }
     }
 }

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.japo.java.entities;
+package org.japo.java.models;
 
 import java.io.Serializable;
-import org.japo.java.lib.UtilesValidacion;
+import org.japo.java.libraries.UtilesValidacion;
 
 /**
  *
@@ -24,10 +24,10 @@ import org.japo.java.lib.UtilesValidacion;
  */
 public class Model implements Serializable {
 
-    // Número de items
+    // Número de Items
     public static final int NUM_ITEMS = 11;
 
-    // Constantes de acceso
+    // Constantes Acceso
     public static final int POS_TEXTO = 0;
     public static final int POS_FAMILIA = 1;
     public static final int POS_NEGRITA = 2;
@@ -40,20 +40,20 @@ public class Model implements Serializable {
     public static final int POS_FONDO_V = 9;
     public static final int POS_FONDO_A = 10;
 
-    // Expresiones regulares
-    public static final String ER_TEXTO = "[\\wáéíóúüñÁÉÍÓÚÜÑ ]+";
-    public static final String ER_FAMILIA = "[\\w ]+";
-    public static final String ER_NEGRITA = "true|false";
-    public static final String ER_CURSIVA = "true|false";
-    public static final String ER_TALLA = "[1-9]\\d|\\d|100";
-    public static final String ER_FRENTE_R = "25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d";
-    public static final String ER_FRENTE_V = "25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d";
-    public static final String ER_FRENTE_A = "25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d";
-    public static final String ER_FONDO_R = "25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d";
-    public static final String ER_FONDO_V = "25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d";
-    public static final String ER_FONDO_A = "25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d";
+    // Expresiones Regulares
+    public static final String ER_TEXTO = "[\\wáéíóúÁÉÍÓÚüÜñÑ ]+";
+    public static final String ER_FAMILIA = "[\\wáéíóúÁÉÍÓÚüÜñÑ ]+";
+    public static final String ER_NEGRITA = "false|true";
+    public static final String ER_CURSIVA = "false|true";
+    public static final String ER_TALLA = "0|[1-9]\\d?|100";
+    public static final String ER_FRENTE_R = "0|[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-5]";
+    public static final String ER_FRENTE_V = "0|[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-5]";
+    public static final String ER_FRENTE_A = "0|[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-5]";
+    public static final String ER_FONDO_R = "0|[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-5]";
+    public static final String ER_FONDO_V = "0|[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-5]";
+    public static final String ER_FONDO_A = "0|[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-5]";
 
-    // Valores por defecto
+    // Valores por Defecto
     public static final String DEF_TEXTO = "Texto de Prueba";
     public static final String DEF_FAMILIA = "Calibri";
     public static final boolean DEF_NEGRITA = false;
@@ -66,7 +66,7 @@ public class Model implements Serializable {
     public static final int DEF_FONDO_V = 255;
     public static final int DEF_FONDO_A = 255;
 
-    // Campos de la entidad
+    // Campos
     private String texto;
     private String familia;
     private boolean negrita;
@@ -81,24 +81,24 @@ public class Model implements Serializable {
 
     // Constructor Predeterminado
     public Model() {
-        texto = DEF_TEXTO;
-        familia = DEF_FAMILIA;
-        negrita = DEF_NEGRITA;
-        cursiva = DEF_CURSIVA;
-        talla = DEF_TALLA;
-        frenteR = DEF_FRENTE_R;
-        frenteV = DEF_FRENTE_V;
-        frenteA = DEF_FRENTE_A;
-        fondoR = DEF_FONDO_R;
-        fondoV = DEF_FONDO_V;
-        fondoA = DEF_FONDO_A;
+        this.texto = DEF_TEXTO;
+        this.familia = DEF_FAMILIA;
+        this.negrita = DEF_NEGRITA;
+        this.cursiva = DEF_CURSIVA;
+        this.talla = DEF_TALLA;
+        this.frenteR = DEF_FRENTE_R;
+        this.frenteV = DEF_FRENTE_V;
+        this.frenteA = DEF_FRENTE_A;
+        this.fondoR = DEF_FONDO_R;
+        this.fondoV = DEF_FONDO_V;
+        this.fondoA = DEF_FONDO_A;
     }
 
     // Constructor Parametrizado
     public Model(String texto, String familia,
-                  boolean negrita, boolean cursiva, int talla,
-                  int frenteR, int frenteV, int frenteA,
-                  int fondoR, int fondoV, int fondoA) {
+            boolean negrita, boolean cursiva, int talla,
+            int frenteR, int frenteV, int frenteA,
+            int fondoR, int fondoV, int fondoA) {
         // Texto
         if (UtilesValidacion.validarDato(texto, ER_TEXTO)) {
             this.texto = texto;
@@ -167,10 +167,10 @@ public class Model implements Serializable {
         } else {
             this.fondoA = DEF_FONDO_A;
         }
-
     }
 
-    // --- INICIO SETTERS / GETTERS
+    //
+    // --- SETTERS + GETTERS ---
     //
     public String getTexto() {
         return texto;
@@ -278,5 +278,7 @@ public class Model implements Serializable {
         }
     }
 
-    // --- FIN SETTERS / GETTERS
+    //
+    // --- SETTERS + GETTERS ---
+    //
 }
